@@ -16,13 +16,44 @@ const App = () => {
     setHistory(storedHistory);
   }, []);
 
-  const handleSummarize = () => {
+  const handleSummarize = async () => {
     if (inputText.trim() === "") return;
-    // Simulasi ringkasan: output sama dengan input
-    setSummary(inputText);
-    const newHistory = [...history, inputText];
-    setHistory(newHistory);
-    localStorage.setItem("summaryHistory", JSON.stringify(newHistory));
+
+    setSummary("");
+
+    // fetch to openrouter API
+    try {
+      const response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: [
+              {
+                role: "user",
+                content: `Summarize the following text without any addition
+      answer. Answer in the language the user speaks:\n${inputText}`,
+              },
+            ],
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setSummary(data.choices[0].message.content);
+      const newHistory = [...history, data.choices[0].message.content];
+      setHistory(newHistory);
+      localStorage.setItem("summaryHistory", JSON.stringify(newHistory));
+    } catch (error) {
+      console.error("Gagal mengambil data ringkasan:", error);
+    } finally {
+      // setLoading(false);
+    }
   };
 
   const handleReset = () => {
