@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 const Summarizer = ({
   inputText,
   setInputText,
@@ -49,7 +51,7 @@ const Summarizer = ({
       <section className="mt-8 bg-white p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">Hasil Ringkasan</h2>
         <p className="text-gray-700">
-          {summary ||
+          {<ReactMarkdown>{summary}</ReactMarkdown> ||
             "Hasil ringkasan teks akan muncul di sini setelah proses ringkasan selesai."}
         </p>
       </section>
