@@ -8,6 +8,7 @@ const App = () => {
   const [summary, setSummary] = useState("");
   const [history, setHistory] = useState([]);
   const [model, setModel] = useState("deepseek/deepseek-chat-v3-0324:free");
+  const [loading, setLoading] = useState(false);
 
   // Ambil riwayat dari localStorage saat komponen pertama kali dimuat
   useEffect(() => {

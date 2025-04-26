@@ -36,13 +36,13 @@ const Summarizer = ({
         <div className="flex flex-col gap-2">
           <button
             onClick={handleSummarize}
-            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
           >
             Ringkas
           </button>
           <button
             onClick={handleReset}
-            className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+            className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
           >
             Reset
           </button>
