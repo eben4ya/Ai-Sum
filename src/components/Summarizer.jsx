@@ -8,6 +8,7 @@ const Summarizer = ({
   handleReset,
   model,
   setModel,
+  loading,
 }) => {
   return (
     <>
@@ -50,10 +51,18 @@ const Summarizer = ({
       </div>
       <section className="mt-8 bg-white p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">Hasil Ringkasan</h2>
-        <p className="text-gray-700">
-          {<ReactMarkdown>{summary}</ReactMarkdown> ||
-            "Hasil ringkasan teks akan muncul di sini setelah proses ringkasan selesai."}
-        </p>
+        <div className="text-gray-700">
+          {summary ? (
+            <ReactMarkdown>{summary}</ReactMarkdown>
+          ) : loading ? (
+            <div className="flex items-center justify-center py-4">
+              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              <span className="ml-3">Memproses ringkasan...</span>
+            </div>
+          ) : (
+            "Hasil ringkasan teks akan muncul di sini setelah proses ringkasan selesai."
+          )}
+        </div>
       </section>
     </>
   );

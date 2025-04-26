@@ -21,6 +21,7 @@ const App = () => {
     if (inputText.trim() === "") return;
 
     setSummary("");
+    setLoading(true);
 
     // fetch to openrouter API
     try {
@@ -53,7 +54,7 @@ const App = () => {
     } catch (error) {
       console.error("Gagal mengambil data ringkasan:", error);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -80,6 +81,7 @@ const App = () => {
           handleReset={handleReset}
           model={model}
           setModel={setModel}
+          loading={loading}
         />
         <History history={history} handleDelete={handleDelete} />
       </main>
